@@ -1,5 +1,7 @@
+import Componenet from "./component";
 const React = {
-  createElement
+  createElement,
+  Componenet,
 }
 
 function createElement(tag, attrs, ...children) {
@@ -8,6 +10,10 @@ function createElement(tag, attrs, ...children) {
     attrs,
     children
   }
+}
+
+export {
+  Componenet
 }
 
 export default React;

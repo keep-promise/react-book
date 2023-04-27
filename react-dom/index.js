@@ -1,12 +1,14 @@
 import Componenet from "../react/component";
+import { diff } from './diff';
 
 const ReactDOM = {
   render
 }
 
-function render(vnode, container) {
-  const ele = _render(vnode);
-  return container.appendChild(ele);
+function render(vnode, container, dom) {
+  // const ele = _render(vnode);
+  // return container.appendChild(ele);
+  return diff(dom, vnode, container);
 }
 
 function createComponent(comp, props) {
@@ -49,7 +51,7 @@ export function renderComponent(comp) {
   console.log('base', comp.base)
 }
 
-function setComponentProps(comp, props) {
+export function setComponentProps(comp, props) {
   if (!comp.base) {
     if (comp.componentWillMount) comp.componentWillMount();
   } else if (comp.componentWillReceiveProps) {
@@ -61,6 +63,8 @@ function setComponentProps(comp, props) {
   renderComponent(comp);
 }
 
+
+// 虚拟dom(vnode)转换成真实dom
 function _render(vnode) {
   console.log(vnode);
   if (vnode === undefined 
@@ -106,7 +110,7 @@ function _render(vnode) {
   return dom;
 }
 
-function setAttribute(dom, key, value) {
+export function setAttribute(dom, key, value) {
   if (key === 'className') {
     key = 'class';
   }
